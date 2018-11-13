@@ -9,7 +9,7 @@ from recommonmark.parser import CommonMarkParser
 def setup(app):
     app.add_stylesheet('css/style.css')
 
-extensions = []
+extensions = ['sphinxcontrib.httpdomain']
 templates_path = ['/home/docs/checkouts/readthedocs.org/readthedocs/templates/sphinx', 'templates', '_templates', '.templates']
 source_suffix = ['.rst']
 source_parsers = {
@@ -29,4 +29,3 @@ latex_documents = [
   ('index', 'liquidity-sdk.tex', u'Liquidity SDK Documentation',
    u'', 'manual'),
 ]
-

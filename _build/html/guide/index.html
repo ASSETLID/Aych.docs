@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting started &mdash; Liquidity SDK latest documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/style.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Transfers" href="../endpoints/transfers.html" />
+    <link rel="prev" title="Liquidity SDK" href="../components/index.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Liquidity SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">Components</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pre-requisite">Pre-requisite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clone-liquidity-sdk-repository">1. Clone Liquidity SDK repository 🐑</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-your-wallet-instance">2. Configure your wallet instance 🌱</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mainnet">Mainnet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rinkeby-testnet">Rinkeby Testnet</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#start-your-wallet">3. Start your wallet 👩‍🔧</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#celebrate">4. Celebrate 🎉</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../endpoints/transfers.html">Transfers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../endpoints/invoices.html">Invoices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../endpoints/wallet.html">Wallet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../endpoints/hub.html">Hub</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Liquidity SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Getting started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/guide/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started">
+<span id="header-n8773"></span><h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="pre-requisite">
+<span id="header-n8774"></span><h2>Pre-requisite<a class="headerlink" href="#pre-requisite" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Docker: <a class="reference external" href="https://docs.docker.com/install/#supported-platforms">Official
+website</a></p>
+<p>Docker is a container management system. It supports Windows, mac and
+most linux distributions. Select the one that applies to your case
+and follow the instructions.</p>
+</li>
+<li><p class="first">Docker-compose: <a class="reference external" href="https://docs.docker.com/compose/install/">Official
+website</a></p>
+<p>Docker compose allows advanced container management. It is required
+to build the daemon properly.</p>
+</li>
+<li><p class="first">A Liquidity registered wallet: <a class="reference external" href="https://wallet.liquidity.network/">Official
+website</a></p>
+<p>This wallet will be managed by your daemon. Click on
+<code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">New</span> <span class="pre">Wallet</span></code>, select the wallet you want register and click on
+<code class="docutils literal notranslate"><span class="pre">Save</span></code>. Then, open your newly created wallet, click on register and
+perform Metamask related actions.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<span id="header-n8786"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>In order to get the daemon up and running on your machine, you must
+follow the instructions listed below.</p>
+<div class="section" id="clone-liquidity-sdk-repository">
+<span id="header-n8788"></span><h3>1. Clone Liquidity SDK repository 🐑<a class="headerlink" href="#clone-liquidity-sdk-repository" title="Permalink to this headline">¶</a></h3>
+<div class="code shell highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone git@github.com/liquidity-network/liquidity-daemon
+</pre></div>
+</div>
+<p>Alternatively, you can download it from
+<a class="reference external" href="https://github.com/liquidity-network/liquidity-daemon/archive/master.zip">here</a></p>
+</div>
+<div class="section" id="configure-your-wallet-instance">
+<span id="header-n8791"></span><h3>2. Configure your wallet instance 🌱<a class="headerlink" href="#configure-your-wallet-instance" title="Permalink to this headline">¶</a></h3>
+<p>A template of the configuration is provided within
+<code class="docutils literal notranslate"><span class="pre">config.template.json</span></code>. You have to copy it into <code class="docutils literal notranslate"><span class="pre">config.json</span></code> and
+edit the configuration.</p>
+<div class="code shell highlight-shell notranslate"><div class="highlight"><pre><span></span>cp config.template.json config.json
+</pre></div>
+</div>
+<p>Your configuration file should look like the following</p>
+<div class="section" id="mainnet">
+<h4>Mainnet<a class="headerlink" href="#mainnet" title="Permalink to this headline">¶</a></h4>
+<div class="code json highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;ETHEREUM_WALLET_PRIVATE_KEY&quot;</span><span class="p">:</span> <span class="s2">&quot;0x...&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ETHEREUM_NODE_URL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mainnet.infura.io&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ETHEREUM_NETWORK_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;HUB_CONTRACT_ADDRESS&quot;</span><span class="p">:</span> <span class="s2">&quot;0x46a1657f132030476496112126Be35384bdDDDAD&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;HUB_PROVIDER_URL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://public.liquidity.network&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rinkeby-testnet">
+<h4>Rinkeby Testnet<a class="headerlink" href="#rinkeby-testnet" title="Permalink to this headline">¶</a></h4>
+<div class="code json highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;ETHEREUM_WALLET_PRIVATE_KEY&quot;</span><span class="p">:</span> <span class="s2">&quot;0x...&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ETHEREUM_NODE_URL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://rinkeby.infura.io&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ETHEREUM_NETWORK_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;HUB_CONTRACT_ADDRESS&quot;</span><span class="p">:</span> <span class="s2">&quot;0x140D29486BABCbD57C63edCCCbf2EC92ffBfEc7c&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;HUB_PROVIDER_URL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://rinkeby.liquidity.network&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="start-your-wallet">
+<span id="header-n8797"></span><h3>3. Start your wallet 👩‍🔧<a class="headerlink" href="#start-your-wallet" title="Permalink to this headline">¶</a></h3>
+<div class="code shell highlight-shell notranslate"><div class="highlight"><pre><span></span>docker-compose up -d
+</pre></div>
+</div>
+<p>This command will start your wallet daemon (<code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file located at the project’s root directory). It can take some time for
+it to synchronise with the hub, especially at first launch.</p>
+</div>
+<div class="section" id="celebrate">
+<span id="header-n8801"></span><h3>4. Celebrate 🎉<a class="headerlink" href="#celebrate" title="Permalink to this headline">¶</a></h3>
+<p>You’re done with the installation! The SDK is self-hosted on your
+machine and is accessible under <code class="docutils literal notranslate"><span class="pre">localhost:3600</span></code>.</p>
+<p>You can try accessing <a class="reference external" href="https://localhost:3600/wallet">https://localhost:3600/wallet</a> where
+you should see the current state of your wallet.</p>
+</div>
+</div>
+<div class="section" id="documentation">
+<span id="header-n8805"></span><h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>The documentation you are about to read is structured in categories.
+Each category has a list of endpoints made accessible by the wallet
+daemon. These endpoints are documented with what they provide, how to
+call them, what are their result and an example is provided.</p>
+<p>If you spot any issues, please post an issue on our <a class="reference external" href="https://github.com/liquidity-network/liquidity-daemon">github
+repository</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../endpoints/transfers.html" class="btn btn-neutral float-right" title="Transfers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../components/index.html" class="btn btn-neutral" title="Liquidity SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

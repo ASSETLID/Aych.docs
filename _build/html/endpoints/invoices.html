@@ -1,0 +1,663 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Invoice &mdash; Liquidity SDK latest documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/style.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Wallet" href="wallet.html" />
+    <link rel="prev" title="Transfers" href="transfers.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Liquidity SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transfers.html">Transfers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Invoices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#generate">Generate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#endpoint">Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#request">Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#response">Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#list">List</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9081">Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9127">Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9178">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wallet.html">Wallet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hub.html">Hub</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Liquidity SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Invoice</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/endpoints/invoices.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="invoice">
+<span id="header-n8993"></span><h1>Invoice<a class="headerlink" href="#invoice" title="Permalink to this headline">¶</a></h1>
+<p>It is useful for merchant to generate a transaction that has to be
+performed by its client. To that end, Liquidity SDK allows you to
+generate invoices. These are prefilled transactions that can be used by
+any liquidity enabled wallet.</p>
+<p>When an invoice is paid, a regular transaction is performed and the
+invoice is resolved.</p>
+<div class="section" id="generate">
+<span id="header-n8995"></span><h2>Generate<a class="headerlink" href="#generate" title="Permalink to this headline">¶</a></h2>
+<p>Generate an invoice of <code class="docutils literal notranslate"><span class="pre">:amount</span></code> wei. If no <code class="docutils literal notranslate"><span class="pre">recipient</span></code> is provided,
+the ethereum address of the wallet daemon is used.</p>
+<div class="section" id="endpoint">
+<span id="header-n8997"></span><h3>Endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h3>
+<dl class="post">
+<dt id="post--invoices">
+<code class="descname">POST </code><code class="descname">/invoices</code><a class="headerlink" href="#post--invoices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="request">
+<span id="header-n8999"></span><h3>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Required</th>
+<th class="head">Description</th>
+<th class="head">Default
+Value</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">amount</span></code></td>
+<td>required</td>
+<td>Amount to
+be
+transfered
+in <em>wei</em></td>
+<td>&#160;</td>
+<td><em>1000000000000000000</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">recipient</span></code></td>
+<td>optional</td>
+<td>Ethereum
+address to
+sent the
+transaction
+to</td>
+<td>SDK’s
+ethereum
+address</td>
+<td><em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">details</span></code></td>
+<td>optional</td>
+<td>Details
+associated
+to the
+transaction</td>
+<td>‘’</td>
+<td><em>“A
+liquidity
+transaction
+“</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">currency</span></code></td>
+<td>optional</td>
+<td>Token to be
+used for
+payment</td>
+<td>ETH</td>
+<td><em>To be
+implemented</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="response">
+<span id="header-n9031"></span><h3>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Required</th>
+<th class="head">Description</th>
+<th class="head">Default
+Value</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">uuid</span></code></td>
+<td>required</td>
+<td>Amount to
+be
+transfered
+in <em>wei</em></td>
+<td>&#160;</td>
+<td>57056981-32b4-422a-9acb-c03ac4a12404</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">destinations</span></code></td>
+<td>required</td>
+<td>Array of
+destinations</td>
+<td>&#160;</td>
+<td>[
+{
+networkId:
+1,
+contractAddress:
+0xac8c3D5242b425DE1b86b17E407D8E949D994010,
+walletAddresses:
+[0x627306090abaB3A6e1400e9345bC60c78a8BEf57] }]</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">amount</span></code></td>
+<td>required</td>
+<td>Amount to
+be
+transfered
+in <em>wei</em></td>
+<td>&#160;</td>
+<td><em>1000000000000000000</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">currency</span></code></td>
+<td>required</td>
+<td>Unique
+identifier
+of the
+transaction</td>
+<td>&#160;</td>
+<td><em>ETH</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">details</span></code></td>
+<td>required</td>
+<td>Sha3 Hash
+of provided
+details</td>
+<td>“” (empty
+string)</td>
+<td><em>0x39ebcda37c1aaa7b6467f16d4f03479e5061031cc61b62342c9216d2ac012a5c</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">nonce</span></code></td>
+<td>required</td>
+<td>Identifier
+generated
+from
+invoice
+data</td>
+<td>&#160;</td>
+<td><em>1270040570</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">encoded.url</span></code></td>
+<td>required</td>
+<td>Cross
+platform
+redirection
+url</td>
+<td>&#160;</td>
+<td><em>https://lqd.money/?data=eyJ1dWlkIjoiNTQxMmEyZjMz…</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">encoded.raw</span></code></td>
+<td>required</td>
+<td>Encoded
+invoice
+data</td>
+<td>&#160;</td>
+<td><em>eyJ1dWlkIjoiNTQxMmEyZjMz…</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="example">
+<span id="header-n9075"></span><h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/invoices</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;recipient&quot;</span><span class="p">:</span> <span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;288e19e69032480784305838b6158055&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;destinations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;networkId&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&quot;contractAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;0xac8c3D5242b425DE1b86b17E407D8E949D994010&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;walletAddresses&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">],</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;currency&quot;</span><span class="p">:</span> <span class="s2">&quot;ETH&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;details&quot;</span><span class="p">:</span> <span class="s2">&quot;0x290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e563&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;nonce&quot;</span><span class="p">:</span> <span class="mi">1270040570</span><span class="p">,</span>
+    <span class="nt">&quot;encoded&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://lqd.money/?data=eyJ1dWlkIjoiNTQxMmEyZjMzMzAyNDIwZGExNjU1ZjI5Y2FhMWUxNGMiLCJkZXN0aW5hdGlvbnMiOlt7Im5ldHdvcmtJZCI6MSwiY29udHJhY3RBZGRyZXNzIjoiMHhhYzhjM0Q1MjQyYjQyNURFMWI4NmIxN0U0MDdEOEU5NDlEOTk0MDEwIiwid2FsbGV0QWRkcmVzc2VzIjpbIjB4MDZBYTQxYjQxODlhRGQ3QjBFMTE0NEU3NEVhRmRFZTJiNkQ1MGUxMCJdfV0sImFtb3VudCI6MiwiY3VycmVuY3kiOiJFVEgiLCJkZXRhaWxzIjoiMHhmZTY3OWQyMDE5MDQzN2YxOGIxZGJhNDEzZmNjM2M1OGIyYzMyNjVkZTMwYzcyNGM4YzEyZDQzMzczNjJmMWExIn0%3D&quot;</span>
+        <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;eyJ1dWlkIjoiNTQxMmEyZjMzMzAyNDIwZGExNjU1ZjI5Y2FhMWUxNGMiLCJkZXN0aW5hdGlvbnMiOlt7Im5ldHdvcmtJZCI6MSwiY29udHJhY3RBZGRyZXNzIjoiMHhhYzhjM0Q1MjQyYjQyNURFMWI4NmIxN0U0MDdEOEU5NDlEOTk0MDEwIiwid2FsbGV0QWRkcmVzc2VzIjpbIjB4MDZBYTQxYjQxODlhRGQ3QjBFMTE0NEU3NEVhRmRFZTJiNkQ1MGUxMCJdfV0sImFtb3VudCI6MiwiY3VycmVuY3kiOiJFVEgiLCJkZXRhaWxzIjoiMHhmZTY3OWQyMDE5MDQzN2YxOGIxZGJhNDEzZmNjM2M1OGIyYzMyNjVkZTMwYzcyNGM4YzEyZDQzMzczNjJmMWExIn0%3D&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="list">
+<span id="header-n9079"></span><h2>List<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h2>
+<p>List all transfer performed by the daemon during this round. Filters
+can be applied.</p>
+<div class="section" id="header-n9081">
+<span id="id1"></span><h3>Endpoint<a class="headerlink" href="#header-n9081" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--invoices">
+<code class="descname">GET </code><code class="descname">/invoices</code><a class="headerlink" href="#get--invoices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="id2">
+<h3>Request<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Required</th>
+<th class="head">Description</th>
+<th class="head">Default
+Value</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">count</span></code></td>
+<td>optional</td>
+<td>Amount to
+be
+transfered
+in <em>wei</em></td>
+<td>100</td>
+<td><em>50</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">recipient</span></code></td>
+<td>optional</td>
+<td>Ethereum
+address to
+sent the
+transaction
+to</td>
+<td>&#160;</td>
+<td><em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">sender</span></code></td>
+<td>optional</td>
+<td>Ethereum
+address
+used to
+perform the
+transaction</td>
+<td>SDK’s
+ethereum
+address</td>
+<td><em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">amount</span></code></td>
+<td>optional</td>
+<td>Amount
+transfered
+in <em>wei</em></td>
+<td>&#160;</td>
+<td><em>1000000000000000000</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">nonce</span></code></td>
+<td>optional</td>
+<td>Identifier
+generated
+from
+invoice
+data</td>
+<td>&#160;</td>
+<td><em>1270040570</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">status</span></code></td>
+<td>optional</td>
+<td>Status of
+the
+transaction</td>
+<td>confirmed</td>
+<td><em>confirmed,
+pending</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="header-n9127">
+<span id="id3"></span><h3>Response<a class="headerlink" href="#header-n9127" title="Permalink to this headline">¶</a></h3>
+<p>Array</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Required</th>
+<th class="head">Description</th>
+<th class="head">Default
+Value</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">recipient</span></code></td>
+<td>required</td>
+<td>Ethereum
+address to
+sent the
+transaction
+to</td>
+<td>&#160;</td>
+<td><em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">sender</span></code></td>
+<td>required</td>
+<td>Ethereum
+address
+used to
+perform the
+transaction</td>
+<td>SDK’s
+ethereum
+address</td>
+<td><em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">amount</span></code></td>
+<td>required</td>
+<td>Amount
+transfered
+in <em>wei</em></td>
+<td>&#160;</td>
+<td><em>1000000000000000000</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">transactionId</span></code></td>
+<td>required</td>
+<td>Unique
+identifier
+of the
+transaction</td>
+<td>&#160;</td>
+<td><em>1</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">status</span></code></td>
+<td>required</td>
+<td>Status of
+the
+transaction</td>
+<td>&#160;</td>
+<td><em>confirmed,
+pending</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">nonce</span></code></td>
+<td>required</td>
+<td>Identifier
+generated
+from
+transaction</td>
+<td>&#160;</td>
+<td><em>1270040570</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">created_on</span></code></td>
+<td>required</td>
+<td>Date the
+transaction
+has been
+performed
+(ISO
+format)</td>
+<td>&#160;</td>
+<td><em>1970-01-01T00:00:00.000Z</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="header-n9178">
+<span id="id4"></span><h3>Example<a class="headerlink" href="#header-n9178" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/invoices?nonce=1270040570</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+</div>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">[</span>
+  <span class="p">{</span>
+      <span class="nt">&quot;sender&quot;</span><span class="p">:</span> <span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;recipient&quot;</span><span class="p">:</span> <span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;created_on&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-07-03T12:33:27.409540Z&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;nonce&quot;</span><span class="p">:</span> <span class="s2">&quot;1270040570&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;txId&quot;</span><span class="p">:</span> <span class="s2">&quot;420&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;confirmed&quot;</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="wallet.html" class="btn btn-neutral float-right" title="Wallet" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="transfers.html" class="btn btn-neutral" title="Transfers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

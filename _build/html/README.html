@@ -1,0 +1,820 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Liquidity SDK &mdash; Liquidity SDK latest documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Liquidity SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="endpoints/transfers.html">Transfers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="endpoints/invoices.html">Invoices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="endpoints/wallet.html">Wallet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="endpoints/hub.html">Hub</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Liquidity SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Liquidity SDK</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/README.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="liquidity-sdk">
+<span id="liquidity-sdk"></span><h1>Liquidity SDK<a class="headerlink" href="#liquidity-sdk" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="about">
+<span id="about"></span><h2>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h2>
+<p>Liquidity Network revolutionizes the way people trade and interact.  Through its network of payment hubs, Liquidity Network enables free,  instant and secure off-chain transfers and exchange of digital assets  and makes people custodian of their own funds.</p>
+<p>We believe in the potential of off-chain technology to ensure  inclusion and trust minimization. We envision a future where everyone is  able to perform money transfers, without the need of a bank account and  free of expensive transaction fees or long waiting times.</p>
+<p>To bring this vision to life, we strongly encourage collaboration and  stimulate developers to work on and implement our technology. The present documentation goes over all methods available for you to start working on it today!</p>
+</div>
+<div class="section" id="liquidity-sdk">
+<span id="id1"></span><h2>Liquidity SDK<a class="headerlink" href="#liquidity-sdk" title="Permalink to this headline">¶</a></h2>
+<p>Liquidity SDK allows you to easily integrate offchain payments and exchanges within your application. It is divided in two different parts. The <strong>wallet daemon</strong> is a self-hosted liquidity wallet management tool for your transactions. The <strong>Liquidity language library</strong> allows you to access wallet daemon directly from your favorite language or from <em>REST</em> endpoints.</p>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>graph LR;
+    A(Language Library) --- B(Wallet daemon);
+    C(REST API) --- B;
+    B --- D(Hub);
+</pre></div>
+</div>
+<div class="section" id="architecture">
+<span id="architecture"></span><h3>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h3>
+<p>Liquidity is build around hubs creating a link between blockchain and offchain transaction ecosystem. Blockchain remains the ultimate source of trust in case of conflict while hub manage offchain state of network participants. To leverage the complexity of an active state management, the wallet daemon is querying the hub to get its last state. It serves this up-to-date state through REST endpoint the language library is using.</p>
+<p>To give a more concrete example, the flow to perform a full transfer of <em>32 wei</em> to a specific user is given below. Language Library is considered to be the end user.</p>
+<div class="highlight-sequence notranslate"><div class="highlight"><pre><span></span>participant Language Library
+participant Wallet daemon
+participant Hub
+Language Library -&gt; Wallet daemon: GET /transfers/0x123...aBC/32
+Wallet daemon -&gt; Wallet daemon: Creates the transfer
+Wallet daemon -&gt; Hub: Send transfer
+Wallet daemon --&gt; Hub: Any updates?
+Hub -&gt; Wallet daemon: Update: Transfer confirmed
+Language Library --&gt; Wallet daemon: GET /transfers?status=pending
+Wallet daemon -&gt; Language Library: []
+</pre></div>
+</div>
+<ol class="simple">
+<li>The user ask the daemon to perform a transfer of 32 wei</li>
+<li>The daemon creates the transfer</li>
+<li>The daemon sends the transfer</li>
+<li>At regular interval, the daemon checks if the hub has included the transfer</li>
+<li>When the transfer is included in an update, the daemon notice it</li>
+<li>When the user checks if there is any pending transfer, none is returned because its transfer has been performed</li>
+</ol>
+<p>If something bad happends during the process, the user is able to contact the daemon and perform security associated operations.</p>
+</div>
+<div class="section" id="wallet-daemon">
+<span id="wallet-daemon"></span><h3>Wallet daemon<a class="headerlink" href="#wallet-daemon" title="Permalink to this headline">¶</a></h3>
+<p>Liquidity network provides you with a non custodian payment system. Its core component is the wallet daemon through which the user can perform operations on the network while remaining in control of its funds. For applications looking to implement offchain payments, this component handles communication with liquidity hub, checking it doesn’t behave badly.</p>
+<p>In term of technology, the daemon is a docker container that synchronises with the hub and provides various endpoints. All endpoints  are using the internal state of the daemon. Because the daemon is hosted by the user and has the knowledge of its private key, it is able to sign offchain transfer and leverage the complex verification process that takes place.</p>
+</div>
+<div class="section" id="language-library">
+<span id="language-library"></span><h3>Language library<a class="headerlink" href="#language-library" title="Permalink to this headline">¶</a></h3>
+<p>Liquidity language library is a convenient way to communication with the daemon. It wraps the provided REST API using language specific feature. For now, the language library is only available for Node.JS. If you have build an implementation for a language you love, you can submit an issue on <a class="reference external" href="https://github.com/liquidity-network/liquidity-daemon">liquidity sdk repo</a>.</p>
+<p>In the transfer sequence described above, the user has to call the daemon on a regular basis in order to know if it still has any transfers pending. This active wait is not convenient and doesn’t integrate well within an application flow. To leverage it, Node.JS library has created a transfer method that returns a promise which is resolved when the transfer has been performed.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">liquidity</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;liquidity-sdk&#39;</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">to</span> <span class="o">=</span> <span class="s1">&#39;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&#39;</span>
+<span class="kr">const</span> <span class="nx">amount</span> <span class="o">=</span> <span class="mi">32</span>
+
+<span class="kr">const</span> <span class="nx">performedTransfer</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">liquidity</span><span class="p">.</span><span class="nx">transfers</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="nx">amount</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Tranfer has been </span><span class="si">${</span><span class="nx">performedTranfer</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="getting-started">
+<span id="getting-started"></span><h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pre-requisite">
+<span id="pre-requisite"></span><h3>Pre-requisite<a class="headerlink" href="#pre-requisite" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Docker: <a class="reference external" href="https://docs.docker.com/install/#supported-platforms">Official website</a></p>
+<p>Docker is a container management system. It supports Windows, mac and most linux distributions. Select the one that applies to your case and follow the instructions.</p>
+</li>
+<li><p class="first">Docker-compose: <a class="reference external" href="https://docs.docker.com/compose/install/">Official website</a></p>
+<p>Docker compose allows advanced container management. It is required to build the daemon properly.</p>
+</li>
+<li><p class="first">A Liquidity registered wallet: <a class="reference external" href="https://wallet.liquidity.network/">Official website</a></p>
+<p>This wallet will be managed by your daemon. Click on <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">New</span> <span class="pre">Wallet</span></code>, select the wallet you want register and click on <code class="docutils literal notranslate"><span class="pre">Save</span></code>. Then, open your newly created wallet, click on register and perform Metamask related actions.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<span id="installation"></span><h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<p>In order to get the daemon up and running on your machine,  you must follow the instructions listed below.</p>
+<div class="section" id="clone-liquidity-sdk-repository-sheep">
+<span id="clone-liquidity-sdk-repository-sheep"></span><h4>1. Clone Liquidity SDK repository :sheep:<a class="headerlink" href="#clone-liquidity-sdk-repository-sheep" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone git@github.com/liquidity-network/liquidity-daemon
+</pre></div>
+</div>
+<p>Alternatively, you can download it from <a class="reference external" href="https://github.com/liquidity-network/liquidity-daemon/archive/master.zip">here</a></p>
+</div>
+<div class="section" id="configure-your-wallet-instance-seedling">
+<span id="configure-your-wallet-instance-seedling"></span><h4>2. Configure your wallet instance :seedling:<a class="headerlink" href="#configure-your-wallet-instance-seedling" title="Permalink to this headline">¶</a></h4>
+<p>A template of the configuration is provided within <code class="docutils literal notranslate"><span class="pre">config.template.json</span></code>. You have to copy it into <code class="docutils literal notranslate"><span class="pre">config.json</span></code> and edit the configuration.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp config.template.json config.json
+</pre></div>
+</div>
+<p>Your configuration file should look like the following</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;ETHEREUM_WALLET_PRIVATE_KEY&quot;</span><span class="p">:</span> <span class="s2">&quot;0x...&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ETHEREUM_NODE_URL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mainnet.infura.io&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ETHEREUM_NETWORK_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;HUB_CONTRACT_ADDRESS&quot;</span><span class="p">:</span> <span class="s2">&quot;0xac8c3D5242b425DE1b86b17E407D8E949D994010&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;HUB_PROVIDER_URL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://beta.liquidity.network&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="start-your-wallet-woman-mechanic">
+<span id="start-your-wallet-woman-mechanic"></span><h4>3. Start your wallet :woman_mechanic:<a class="headerlink" href="#start-your-wallet-woman-mechanic" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose up -d
+</pre></div>
+</div>
+<p>For those of you who are on have a graphic docker version, you have to launch <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file located at the root of liquidity sdk directory.</p>
+<p>This command will start your wallet daemon. It can take some time for it to synchronise with the hub, especially at first launch.</p>
+</div>
+<div class="section" id="celebrate-tada">
+<span id="celebrate-tada"></span><h4>4. Celebrate :tada:<a class="headerlink" href="#celebrate-tada" title="Permalink to this headline">¶</a></h4>
+<p>You’re done with the installation! The SDK is self-hosted on your machine and is accessible under <code class="docutils literal notranslate"><span class="pre">localhost:3600</span></code>.</p>
+<p>You can try accessing <a class="reference external" href="https://localhost:3600/wallet">https://localhost:3600/wallet</a> where you should see the current state of your wallet.</p>
+</div>
+</div>
+<div class="section" id="documentation">
+<span id="documentation"></span><h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
+<p>The documentation you are about to read is structured in categories. Each category has a list of endpoints made accessible by the wallet daemon. These endpoints are documented with what they provide, how to call them, what are their result and an example is provided.</p>
+<p>If you spot any issues, please post an issue on our <a class="reference external" href="https://github.com/liquidity-network/liquidity-daemon">github repository</a></p>
+</div>
+</div>
+<div class="section" id="transfers">
+<span id="transfers"></span><h2>Transfers<a class="headerlink" href="#transfers" title="Permalink to this headline">¶</a></h2>
+<p>Transfers endpoint manages wallet transfers. You should use it to send and checks the state of your transfers. It saves all transfers you make in a database. Therefore it is possible to retrieve your funds if the hub goes down, satisfying the non-custodian property.</p>
+<div class="section" id="send">
+<span id="send"></span><h3>Send<a class="headerlink" href="#send" title="Permalink to this headline">¶</a></h3>
+<p>Send a transfer to <code class="docutils literal notranslate"><span class="pre">:recipient</span></code> of <code class="docutils literal notranslate"><span class="pre">:amount</span></code> wei.</p>
+<div class="section" id="endpoint">
+<span id="endpoint"></span><h4>Endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>POST /transfers/:recipient/:amount
+</pre></div>
+</div>
+</div>
+<div class="section" id="request">
+<span id="request"></span><h4>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h4>
+<p>| Name        | Required | Description                                 | Default Value | Example                                      |
+| ———– | ——– | ——————————————- | ————- | ——————————————– |
+| <code class="docutils literal notranslate"><span class="pre">recipient</span></code> | required | Ethereum address to sent the transaction to |               | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">amount</span></code>    | required | Amount to be transfered in <em>wei</em>            |               | <em>1000000000000000000</em>                        |</p>
+</div>
+<div class="section" id="response">
+<span id="response"></span><h4>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h4>
+<p>| Name            | Required | Description                                          | Default Value | Example                                      |
+| ————— | ——– | —————————————————- | ————- | ——————————————– |
+| <code class="docutils literal notranslate"><span class="pre">sender</span></code>        | required | Ethereum address used to perform the transaction     |               | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">recipient</span></code>     | required | Ethereum address of the recipient                    |               | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">amount</span></code>        | required | Amount to be transfered in <em>wei</em>                     |               | <em>1000000000000000000</em>                        |
+| <code class="docutils literal notranslate"><span class="pre">created_on</span></code>    | required | Date the transaction has been performed (ISO format) |               | <em>1970-01-01T00:00:00.000Z</em>                   |
+| <code class="docutils literal notranslate"><span class="pre">nonce</span></code>         | required | Identifier generated from transaction                |               | <em>1270040570</em>                                 |
+| <code class="docutils literal notranslate"><span class="pre">transactionId</span></code> | required | Unique identifier of the transaction                 |               | <em>1</em>                                          |
+| <code class="docutils literal notranslate"><span class="pre">status</span></code>        | required | Status of the transaction                            |               | <em>confirmed, pending</em>                         |</p>
+</div>
+<div class="section" id="example">
+<span id="example"></span><h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>POST /transfers/0x627306090abaB3A6e1400e9345bC60c78a8BEf57/1
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;sender&quot;</span><span class="p">:</span> <span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;recipient&quot;</span><span class="p">:</span> <span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;created_on&quot;</span><span class="p">:</span> <span class="s2">&quot;1970-01-01T00:00:00.000Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;nonce&quot;</span><span class="p">:</span> <span class="s2">&quot;1270040570&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;txId&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;pending&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="list">
+<span id="list"></span><h3>List<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h3>
+<p>List all transfer performed by the daemon during this round. Filters can be applied.</p>
+<div class="section" id="endpoint">
+<span id="id2"></span><h4>Endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /transfers
+</pre></div>
+</div>
+</div>
+<div class="section" id="request">
+<span id="id3"></span><h4>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h4>
+<p>| Name            | Required | Description                                      | Default Value          | Example                                      |
+| ————— | ——– | ———————————————— | ———————- | ——————————————– |
+| <code class="docutils literal notranslate"><span class="pre">count</span></code>         | optional | Amount to be transfered in <em>wei</em>                 | 100                    | <em>50</em>                                         |
+| <code class="docutils literal notranslate"><span class="pre">recipient</span></code>     | optional | Ethereum address to sent the transaction to      |                        | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">sender</span></code>        | optional | Ethereum address used to perform the transaction | SDK’s ethereum address | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">amount</span></code>        | optional | Amount to be transfered in <em>wei</em>                 |                        | <em>1000000000000000000</em>                        |
+| <code class="docutils literal notranslate"><span class="pre">transactionId</span></code> | optional | Unique identifier of the transaction             |                        | <em>1</em>                                          |
+| <code class="docutils literal notranslate"><span class="pre">status</span></code>        | optional | Status of the transaction                        | confirmed              | <em>confirmed, pending</em>                         |</p>
+</div>
+<div class="section" id="response">
+<span id="id4"></span><h4>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h4>
+<p>Array</p>
+<p>| Name            | Required | Description                                 | Default Value          | Example                                      |
+| ————— | ——– | ——————————————- | ———————- | ——————————————– |
+| <code class="docutils literal notranslate"><span class="pre">recipient</span></code>     | required | Ethereum address to sent the transaction to |                        | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">sender</span></code>        | required | Ethereum address used to perform the transaction | SDK’s ethereum address | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">amount</span></code>        | required | Amount to be transfered in <em>wei</em>            |                        | <em>1000000000000000000</em>                        |
+| <code class="docutils literal notranslate"><span class="pre">transactionId</span></code> | required | Unique identifier of the transaction        |                        | <em>1</em>                                          |
+| <code class="docutils literal notranslate"><span class="pre">status</span></code>        | required | Status of the transaction                   |               | <em>confirmed, pending</em>                         |
+| <code class="docutils literal notranslate"><span class="pre">nonce</span></code>         | required | Identifier generated from transaction                |               | <em>1270040570</em>                                 |
+| <code class="docutils literal notranslate"><span class="pre">created_on</span></code>    | required | Date the transaction has been performed (ISO format) |               | <em>1970-01-01T00:00:00.000Z</em>                   |</p>
+</div>
+<div class="section" id="example">
+<span id="id5"></span><h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /transfers?status=pending
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;sender&quot;</span><span class="p">:</span> <span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;recipient&quot;</span><span class="p">:</span> <span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;created_on&quot;</span><span class="p">:</span> <span class="s2">&quot;1970-01-01T00:00:00.000Z&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;nonce&quot;</span><span class="p">:</span> <span class="s2">&quot;1270040570&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;txId&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;pending&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="invoice">
+<span id="invoice"></span><h2>Invoice<a class="headerlink" href="#invoice" title="Permalink to this headline">¶</a></h2>
+<p>It is useful for merchant to generate a transaction that has to be performed by its client. To that end, Liquidity SDK allows you to generate invoices. These are prefilled transactions that can be used by any liquidity enabled wallet.</p>
+<p>When an invoice is paid, a regular transaction is performed and the invoice is resolved.</p>
+<div class="section" id="generate">
+<span id="generate"></span><h3>Generate<a class="headerlink" href="#generate" title="Permalink to this headline">¶</a></h3>
+<p>Generate an invoice of <code class="docutils literal notranslate"><span class="pre">:amount</span></code> wei. If no <code class="docutils literal notranslate"><span class="pre">recipient</span></code> is provided, the ethereum address of the wallet daemon is used.</p>
+<div class="section" id="endpoint">
+<span id="id6"></span><h4>Endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>POST /invoices/:amount
+</pre></div>
+</div>
+</div>
+<div class="section" id="request">
+<span id="id7"></span><h4>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h4>
+<p>| Name        | Required | Description                                 | Default Value          | Example                                      |
+| ———– | ——– | ——————————————- | ———————- | ——————————————– |
+| <code class="docutils literal notranslate"><span class="pre">amount</span></code>    | required | Amount to be transfered in <em>wei</em>            |                        | <em>1000000000000000000</em>                        |
+| <code class="docutils literal notranslate"><span class="pre">recipient</span></code> | optional | Ethereum address to sent the transaction to | SDK’s ethereum address | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">details</span></code>   | optional | Details associated to the transaction       | ‘’                     | <em>“A liquidity transaction”</em>                  |
+| <code class="docutils literal notranslate"><span class="pre">currency</span></code>  | optional | Token to be used for payment                | ETH                    | <em>To be implemented</em>                          |</p>
+</div>
+<div class="section" id="response">
+<span id="id8"></span><h4>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h4>
+<p>| Name            | Required | Description                                 | Default Value          | Example                                      |
+| ————— | ——– | ——————————————- | ———————- | ——————————————– |
+| <code class="docutils literal notranslate"><span class="pre">uuid</span></code>        | required | Amount to be transfered in <em>wei</em>            |                        | 57056981-32b4-422a-9acb-c03ac4a12404 |
+| <code class="docutils literal notranslate"><span class="pre">destinations</span></code>  | required | Array of destinations |                        | <i>[<br/><p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+{<br/><p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+networkId: 1,<br/><p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+contractAddress: 0xac8c3D5242b425DE1b86b17E407D8E949D994010,<br/><p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+walletAddresses: [0x627306090abaB3A6e1400e9345bC60c78a8BEf57],<br/><p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+}<br/>]</i> |
+| <code class="docutils literal notranslate"><span class="pre">amount</span></code>        | required | Amount to be transfered in <em>wei</em>            |                        | <em>1000000000000000000</em>                        |
+| <code class="docutils literal notranslate"><span class="pre">currency</span></code> | required | Unique identifier of the transaction        |                        | <em>ETH</em>                                       |
+| <code class="docutils literal notranslate"><span class="pre">details</span></code>        | required | Sha3 Hash of provided details | “” (empty string) | <em>0x39ebcda37c1aaa7b6467f16d4f03479e5061031cc61b62342c9216d2ac012a5c</em> |
+| <code class="docutils literal notranslate"><span class="pre">nonce</span></code>         | required | Identifier generated from invoice data          |               | <em>1270040570</em>                                 |</p>
+</div>
+<div class="section" id="example">
+<span id="id9"></span><h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>POST /invoices/1?recipient=0x627306090abaB3A6e1400e9345bC60c78a8BEf57
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;288e19e69032480784305838b6158055&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;destinations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;networkId&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&quot;contractAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;0xac8c3D5242b425DE1b86b17E407D8E949D994010&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;walletAddresses&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">],</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;currency&quot;</span><span class="p">:</span> <span class="s2">&quot;ETH&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;details&quot;</span><span class="p">:</span> <span class="s2">&quot;0x290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e563&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;nonce&quot;</span><span class="p">:</span> <span class="mi">1270040570</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="list">
+<span id="id10"></span><h3>List<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h3>
+<p>List all transfer performed by the daemon during this round. Filters can be applied.</p>
+<div class="section" id="endpoint">
+<span id="id11"></span><h4>Endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /invoices
+</pre></div>
+</div>
+</div>
+<div class="section" id="request">
+<span id="id12"></span><h4>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h4>
+<p>| Name        | Required | Description                                      | Default Value          | Example                                      |
+| ———– | ——– | ———————————————— | ———————- | ——————————————– |
+| <code class="docutils literal notranslate"><span class="pre">count</span></code>     | optional | Amount to be transfered in <em>wei</em>                 | 100                    | <em>50</em>                                         |
+| <code class="docutils literal notranslate"><span class="pre">recipient</span></code> | optional | Ethereum address to sent the transaction to      |                        | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">sender</span></code>    | optional | Ethereum address used to perform the transaction | SDK’s ethereum address | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">amount</span></code>    | optional | Amount transfered in <em>wei</em>                       |                        | <em>1000000000000000000</em>                        |
+| <code class="docutils literal notranslate"><span class="pre">nonce</span></code>     | optional | Identifier generated from invoice data           |                        | <em>1270040570</em>                                 |
+| <code class="docutils literal notranslate"><span class="pre">status</span></code>    | optional | Status of the transaction                        | confirmed              | <em>confirmed, pending</em>                         |</p>
+</div>
+<div class="section" id="response">
+<span id="id13"></span><h4>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h4>
+<p>Array</p>
+<p>| Name            | Required | Description                                 | Default Value          | Example                                      |
+| ————— | ——– | ——————————————- | ———————- | ——————————————– |
+| <code class="docutils literal notranslate"><span class="pre">recipient</span></code>     | required | Ethereum address to sent the transaction to |                        | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">sender</span></code>        | required | Ethereum address used to perform the transaction | SDK’s ethereum address | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">amount</span></code>        | required | Amount transfered in <em>wei</em>           |                        | <em>1000000000000000000</em>                        |
+| <code class="docutils literal notranslate"><span class="pre">transactionId</span></code> | required | Unique identifier of the transaction        |                        | <em>1</em>                                          |
+| <code class="docutils literal notranslate"><span class="pre">status</span></code>        | required | Status of the transaction                   |               | <em>confirmed, pending</em>                         |
+| <code class="docutils literal notranslate"><span class="pre">nonce</span></code>         | required | Identifier generated from transaction                |               | <em>1270040570</em>                                 |
+| <code class="docutils literal notranslate"><span class="pre">created_on</span></code>    | required | Date the transaction has been performed (ISO format) |               | <em>1970-01-01T00:00:00.000Z</em>                   |</p>
+</div>
+<div class="section" id="example">
+<span id="id14"></span><h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /invoices?nonce=1270040570
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;sender&quot;</span><span class="p">:</span> <span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;recipient&quot;</span><span class="p">:</span> <span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;created_on&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-07-03T12:33:27.409540Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;nonce&quot;</span><span class="p">:</span> <span class="s2">&quot;1270040570&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;txId&quot;</span><span class="p">:</span> <span class="s2">&quot;420&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;confirmed&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="wallet">
+<span id="wallet"></span><h2>Wallet<a class="headerlink" href="#wallet" title="Permalink to this headline">¶</a></h2>
+<p>Wallet endpoint provides all informations related to the current state of the daemon.</p>
+<div class="section" id="information">
+<span id="information"></span><h3>Information<a class="headerlink" href="#information" title="Permalink to this headline">¶</a></h3>
+<p>Retrieve all information about the wallet managed by the daemon.</p>
+<div class="section" id="endpoint">
+<span id="id15"></span><h4>Endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /wallet
+</pre></div>
+</div>
+</div>
+<div class="section" id="request">
+<span id="id16"></span><h4>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h4>
+<p>| Name | Required | Description | Default Value | Example |
+| —- | ——– | ———– | ————- | ——- |
+|      |          |             |               |         |</p>
+</div>
+<div class="section" id="response">
+<span id="id17"></span><h4>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h4>
+<p>| Name                 | Required | Description                                | Default Value | Example                                      |
+| ——————– | ——– | —————————————— | ————- | ——————————————– |
+| <code class="docutils literal notranslate"><span class="pre">address</span></code>            | required | SDK’s ethereum address                     |               | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">ethereumNodeUrl</span></code>    | required | Ethereum node SDK is connected to          |               | <em>https://mainnet.infura.io/</em>                 |
+| <code class="docutils literal notranslate"><span class="pre">ethereumNetworkId</span></code>  | required | Network id seen by SDK                     |               | <em>1</em>                                          |
+| <code class="docutils literal notranslate"><span class="pre">hubContractAddress</span></code> | required | Liquidity Hub contract SDK is connected to |               | <em>0xac8c3D5242b425DE1b86b17E407D8E949D994010</em> |
+| <code class="docutils literal notranslate"><span class="pre">hubProviderUrl</span></code>     | required | Liquidity Hub host SDK is connected to     |               | <em>https://beta.liquidity.network</em>             |
+| <code class="docutils literal notranslate"><span class="pre">amount</span></code>             | required | Amount SDK manages off-chain               |               | <em>1000000000000000000</em>                        |
+| <code class="docutils literal notranslate"><span class="pre">onchain</span></code>            | required | On-chain information managed by the SDK    |               | <em>{ amount: 0 }</em>                              |</p>
+</div>
+<div class="section" id="example">
+<span id="id18"></span><h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /wallet
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;ethereumNodeUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mainnet.infura.io/&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;ethereumNetworkId&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;hubContractAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;0xac8c3D5242b425DE1b86b17E407D8E949D994010&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;hubProviderUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://beta.liquidity.network&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;onchain&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="hub">
+<span id="hub"></span><h2>Hub<a class="headerlink" href="#hub" title="Permalink to this headline">¶</a></h2>
+<p>in your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file, you have specified a <code class="docutils literal notranslate"><span class="pre">HUB_PROVIDER_URL</span></code>. This url is how the daemon communicates and retrieve information stored on the hub. Hub endpoints are exposed trough this category and allows the user to get low level information.</p>
+<div class="section" id="wallets">
+<span id="wallets"></span><h3>Wallets<a class="headerlink" href="#wallets" title="Permalink to this headline">¶</a></h3>
+<p>List all wallets registered on associated liquidity hub.</p>
+<div class="section" id="endpoint">
+<span id="id19"></span><h4>Endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /hub/wallets
+</pre></div>
+</div>
+</div>
+<div class="section" id="request">
+<span id="id20"></span><h4>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h4>
+<p>| Name | Required | Description | Default Value | Example |
+| —- | ——– | ———– | ————- | ——- |
+|      |          |             |               |         |</p>
+</div>
+<div class="section" id="response">
+<span id="id21"></span><h4>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h4>
+<p>Array</p>
+<p>| Name      | Required | Description                                                  | Default Value | Example                                    |
+| ——— | ——– | ———————————————————— | ————- | —————————————— |
+| <code class="docutils literal notranslate"><span class="pre">address</span></code> | required | Liquidity registered ethereum address without prepending <em>0x</em> |               | <em>627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |</p>
+</div>
+<div class="section" id="example">
+<span id="id22"></span><h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /hub/wallets
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="audit-registration">
+<span id="audit-registration"></span><h3>Audit Registration<a class="headerlink" href="#audit-registration" title="Permalink to this headline">¶</a></h3>
+<p>For a specific <code class="docutils literal notranslate"><span class="pre">:address</span></code>, get information about its registration.</p>
+<div class="section" id="endpoint">
+<span id="id23"></span><h4>Endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /hub/audit/:address/registration
+</pre></div>
+</div>
+</div>
+<div class="section" id="request">
+<span id="id24"></span><h4>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h4>
+<p>| Name      | Required | Description                           | Default Value          | Example                                      |
+| ——— | ——– | ————————————- | ———————- | ——————————————– |
+| <code class="docutils literal notranslate"><span class="pre">address</span></code> | required | Liquidity registered ethereum address | SDK’s ethereum address | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |</p>
+</div>
+<div class="section" id="response">
+<span id="id25"></span><h4>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h4>
+<p>| Name               | Required | Description                      | Default Value | Example                                                      |
+| —————— | ——– | ——————————– | ————- | ———————————————————— |
+| <code class="docutils literal notranslate"><span class="pre">round</span></code>            | required | Round the wallet was registered  |               | <em>4</em>                                                          |
+| <code class="docutils literal notranslate"><span class="pre">wallet_signature</span></code> | required | Wallet signature on registration |               | <em>691550b1480f09d50789777d176323f9c4c13a0817263f063d35986ce940086d398517571e68511025800f94789faf6331d93b8af8698546e25f850ceceffb711b</em> |
+| <code class="docutils literal notranslate"><span class="pre">hub_signature</span></code>    | required | Hub signature on registration    |               | <em>7795d1f7314bbbbf8a4144a7343ce413d5640099d889093270909e34b21e55f12956b66cf786da22e0c3774ffe72b107812ed3cddae35dc488705b1a736a2c401b</em> |</p>
+</div>
+<div class="section" id="example">
+<span id="id26"></span><h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /hub/audit/0x627306090abaB3A6e1400e9345bC60c78a8BEf57/registration
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;round&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="nt">&quot;wallet_signature&quot;</span><span class="p">:</span> <span class="s2">&quot;691550b1480f09d50789777d176323f9c4c13a0817263f063d35986ce940086d398517571e68511025800f94789faf6331d93b8af8698546e25f850ceceffb711b&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;hub_signature&quot;</span><span class="p">:</span> <span class="s2">&quot;7795d1f7314bbbbf8a4144a7343ce413d5640099d889093270909e34b21e55f12956b66cf786da22e0c3774ffe72b107812ed3cddae35dc488705b1a736a2c401b&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="audit-transfers">
+<span id="audit-transfers"></span><h3>Audit Transfers<a class="headerlink" href="#audit-transfers" title="Permalink to this headline">¶</a></h3>
+<p>For a specific <code class="docutils literal notranslate"><span class="pre">:address</span></code>, get information about its transfers.</p>
+<div class="section" id="endpoint">
+<span id="id27"></span><h4>Endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /hub/audit/:address/transfers
+</pre></div>
+</div>
+</div>
+<div class="section" id="request">
+<span id="id28"></span><h4>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h4>
+<p>| Name      | Required | Description                           | Default Value          | Example                                      |
+| ——— | ——– | ————————————- | ———————- | ——————————————– |
+| <code class="docutils literal notranslate"><span class="pre">address</span></code> | required | Liquidity registered ethereum address | SDK’s ethereum address | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |</p>
+</div>
+<div class="section" id="response">
+<span id="id29"></span><h4>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h4>
+<p>Array</p>
+<p>| Name            | Required | Description                                 | Default Value          | Example                                      |
+| ————— | ——– | ——————————————- | ———————- | ——————————————– |
+| <code class="docutils literal notranslate"><span class="pre">recipient</span></code>     | required | Ethereum address to sent the transaction to |                        | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">sender</span></code>        | required | Ethereum address used to perform the transaction | SDK’s ethereum address | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |
+| <code class="docutils literal notranslate"><span class="pre">amount</span></code>        | required | Amount transfered in <em>wei</em>           |                        | <em>1000000000000000000</em>                        |
+| <code class="docutils literal notranslate"><span class="pre">transactionId</span></code> | required | Unique identifier of the transaction        |                        | <em>1</em>                                          |
+| <code class="docutils literal notranslate"><span class="pre">status</span></code>        | required | Status of the transaction                   |               | <em>confirmed, pending</em>                         |
+| <code class="docutils literal notranslate"><span class="pre">nonce</span></code>         | required | Identifier generated from transaction                |               | <em>1270040570</em>                                 |
+| <code class="docutils literal notranslate"><span class="pre">round</span></code> | required | Round the transaction was performed | | <em>4</em> |</p>
+</div>
+<div class="section" id="example">
+<span id="id30"></span><h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /hub/audit/0x627306090abaB3A6e1400e9345bC60c78a8BEf57/transfers
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;transactionId&quot;</span><span class="p">:</span> <span class="s2">&quot;38&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;round&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="nt">&quot;recipient&quot;</span><span class="p">:</span> <span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;sender&quot;</span><span class="p">:</span> <span class="s2">&quot;0xd977dA63d086d222EDE0aa68ee84328310485FFE&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;50000&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;nonce&quot;</span><span class="p">:</span> <span class="s2">&quot;1270040570&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="audit-deposits">
+<span id="audit-deposits"></span><h3>Audit Deposits<a class="headerlink" href="#audit-deposits" title="Permalink to this headline">¶</a></h3>
+<p>For a specific <code class="docutils literal notranslate"><span class="pre">:address</span></code>, get information about its deposits.</p>
+<div class="section" id="endpoint">
+<span id="id31"></span><h4>Endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /hub/audit/:address/deposits
+</pre></div>
+</div>
+</div>
+<div class="section" id="request">
+<span id="id32"></span><h4>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h4>
+<p>| Name      | Required | Description                           | Default Value          | Example                                      |
+| ——— | ——– | ————————————- | ———————- | ——————————————– |
+| <code class="docutils literal notranslate"><span class="pre">address</span></code> | required | Liquidity registered ethereum address | SDK’s ethereum address | <em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em> |</p>
+</div>
+<div class="section" id="response">
+<span id="id33"></span><h4>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h4>
+<p>| Name            | Required | Description                                              | Default Value | Example                                                      |
+| ————— | ——– | ——————————————————– | ————- | ———————————————————— |
+| <code class="docutils literal notranslate"><span class="pre">transactionId</span></code> | required | Transaction id of the deposit on Ethereum                |               | <em>ee456c4f5f31e9b44c94df251690469fef4cf1c2b8f603edc62d7703acda098c</em> |
+| <code class="docutils literal notranslate"><span class="pre">block</span></code>         | required | Block the transaction has been included into on Ethereum |               | <em>5898261</em>                                                    |
+| <code class="docutils literal notranslate"><span class="pre">round</span></code>         | required | Round the wallet was registered                          |               | <em>4</em>                                                          |
+| <code class="docutils literal notranslate"><span class="pre">amount</span></code>        | required | Amount deposited in <em>wei</em>                                |               | <em>1000000000000000000</em>                                        |
+| <code class="docutils literal notranslate"><span class="pre">created_on</span></code>    | required | Date the transaction has been performed (ISO format)     |               | <em>1970-01-01T00:00:00.000Z</em>                                   |</p>
+</div>
+<div class="section" id="example">
+<span id="id34"></span><h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>GET /hub/audit/0x627306090abaB3A6e1400e9345bC60c78a8BEf57/deposits
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;transactionId&quot;</span><span class="p">:</span> <span class="s2">&quot;ee456c4f5f31e9b44c94df251690469fef4cf1c2b8f603edc62d7703acda098c&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;block&quot;</span><span class="p">:</span> <span class="mi">5898261</span><span class="p">,</span>
+        <span class="nt">&quot;round&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;50000&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-07-03T12:33:27.409540Z&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="communities">
+<span id="communities"></span><h2>Communities<a class="headerlink" href="#communities" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Developement communities<ul>
+<li><a class="reference external" href="https://github.com/liquidity-network">Github</a></li>
+<li><a class="reference external" href="https://t.me/thibaultmeunier">Telegram</a></li>
+</ul>
+</li>
+<li>General communities<ul>
+<li><a class="reference external" href="https://twitter.com/liquiditynet">Twitter</a></li>
+<li><a class="reference external" href="https://t.me/liquiditynetwork">Telegram</a></li>
+<li><a class="reference external" href="https://medium.com/&#64;liquidity.network">Medium</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="future-works">
+<span id="future-works"></span><h2>Future works<a class="headerlink" href="#future-works" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>TODO: remove this section</div></blockquote>
+<p>This won’t be made public, it’s just to give an idea</p>
+<p><strong>API</strong>: deposit, withdraw, challenges, swap</p>
+<p><strong>Privacy</strong>: no private key within the daemon, messages should be signed client side. It would allow a liquidity managed daemon</p>
+<p><strong>Registration</strong>: If the address is not yet registered, the daemon should go through the process</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

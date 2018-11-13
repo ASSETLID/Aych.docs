@@ -1,0 +1,752 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Hub &mdash; Liquidity SDK latest documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/style.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Wallet" href="wallet.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Liquidity SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transfers.html">Transfers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invoices.html">Invoices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wallet.html">Wallet</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hub</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#wallets">Wallets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#endpoint">Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#request">Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#response">Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#audit-registration">Audit Registration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9296">Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9298">Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9312">Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9338">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#audit-transfers">Audit Transfers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9344">Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9346">Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9360">Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9411">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#audit-deposits">Audit Deposits</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9417">Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9419">Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9433">Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#header-n9471">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Liquidity SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Hub</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/endpoints/hub.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hub">
+<span id="header-n9255"></span><h1>Hub<a class="headerlink" href="#hub" title="Permalink to this headline">¶</a></h1>
+<p>in your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file, you have specified a <code class="docutils literal notranslate"><span class="pre">HUB_PROVIDER_URL</span></code>.
+This url is how the daemon communicates and retrieve information
+stored on the hub. Hub endpoints are exposed trough this category and
+allows the user to get low level information.</p>
+<div class="section" id="wallets">
+<span id="header-n9257"></span><h2>Wallets<a class="headerlink" href="#wallets" title="Permalink to this headline">¶</a></h2>
+<p>List all wallets registered on associated liquidity hub.</p>
+<div class="section" id="endpoint">
+<span id="header-n9259"></span><h3>Endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--hub-wallets">
+<code class="descname">GET </code><code class="descname">/hub/wallets</code><a class="headerlink" href="#get--hub-wallets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="request">
+<span id="header-n9261"></span><h3>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="19%" />
+<col width="25%" />
+<col width="28%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Required</th>
+<th class="head">Description</th>
+<th class="head">Default Value</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="response">
+<span id="header-n9275"></span><h3>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h3>
+<p>Array</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Required</th>
+<th class="head">Description</th>
+<th class="head">Default
+Value</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">address</span></code></td>
+<td>required</td>
+<td>Liquidity
+registered
+ethereum
+address
+without
+prepending
+<em>0x</em></td>
+<td>&#160;</td>
+<td><em>627306090abaB3A6e1400e9345bC60c78a8BEf57</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="example">
+<span id="header-n9290"></span><h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/hub/wallets</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+</div>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">[</span>
+   <span class="p">{</span>
+       <span class="nt">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span>
+   <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="audit-registration">
+<span id="header-n9294"></span><h2>Audit Registration<a class="headerlink" href="#audit-registration" title="Permalink to this headline">¶</a></h2>
+<p>For a specific <code class="docutils literal notranslate"><span class="pre">:address</span></code>, get information about its registration.</p>
+<div class="section" id="header-n9296">
+<span id="id1"></span><h3>Endpoint<a class="headerlink" href="#header-n9296" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--hub-audit--address-registration">
+<code class="descname">GET </code><code class="descname">/hub/audit/:address/registration</code><a class="headerlink" href="#get--hub-audit--address-registration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="header-n9298">
+<span id="id2"></span><h3>Request<a class="headerlink" href="#header-n9298" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Required</th>
+<th class="head">Description</th>
+<th class="head">Default
+Value</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">address</span></code></td>
+<td>required</td>
+<td>Liquidity
+registered
+ethereum
+address</td>
+<td>SDK’s
+ethereum
+address</td>
+<td><em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="header-n9312">
+<span id="id3"></span><h3>Response<a class="headerlink" href="#header-n9312" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="69%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Required</th>
+<th class="head">Description</th>
+<th class="head">Default
+Value</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">round</span></code></td>
+<td>required</td>
+<td>Round the
+wallet was
+registered</td>
+<td>&#160;</td>
+<td><em>4</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">wallet_signature</span></code></td>
+<td>required</td>
+<td>Wallet
+signature
+on
+registratio
+n</td>
+<td>&#160;</td>
+<td><em>691550b1480f09d50789777d176323f9c4c13a0817263f063d35986ce940086d398517571e68511025800f94789faf6331d93b8af8698546e25f850ceceffb711b</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">hub_signature</span></code></td>
+<td>required</td>
+<td>Hub
+signature
+on
+registratio
+n</td>
+<td>&#160;</td>
+<td><em>7795d1f7314bbbbf8a4144a7343ce413d5640099d889093270909e34b21e55f12956b66cf786da22e0c3774ffe72b107812ed3cddae35dc488705b1a736a2c401b</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="header-n9338">
+<span id="id4"></span><h3>Example<a class="headerlink" href="#header-n9338" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/hub/audit/0x627306090abaB3A6e1400e9345bC60c78a8BEf57/registration</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+</div>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+   <span class="nt">&quot;round&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+   <span class="nt">&quot;wallet_signature&quot;</span><span class="p">:</span> <span class="s2">&quot;691550b1480f09d50789777d176323f9c4c13a0817263f063d35986ce940086d398517571e68511025800f94789faf6331d93b8af8698546e25f850ceceffb711b&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;hub_signature&quot;</span><span class="p">:</span> <span class="s2">&quot;7795d1f7314bbbbf8a4144a7343ce413d5640099d889093270909e34b21e55f12956b66cf786da22e0c3774ffe72b107812ed3cddae35dc488705b1a736a2c401b&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="audit-transfers">
+<span id="header-n9342"></span><h2>Audit Transfers<a class="headerlink" href="#audit-transfers" title="Permalink to this headline">¶</a></h2>
+<p>For a specific <code class="docutils literal notranslate"><span class="pre">:address</span></code>, get information about its transfers.</p>
+<div class="section" id="header-n9344">
+<span id="id5"></span><h3>Endpoint<a class="headerlink" href="#header-n9344" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--hub-audit--address-transfers">
+<code class="descname">GET </code><code class="descname">/hub/audit/:address/transfers</code><a class="headerlink" href="#get--hub-audit--address-transfers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="header-n9346">
+<span id="id6"></span><h3>Request<a class="headerlink" href="#header-n9346" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Required</th>
+<th class="head">Description</th>
+<th class="head">Default
+Value</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">address</span></code></td>
+<td>required</td>
+<td>Liquidity
+registered
+ethereum
+address</td>
+<td>SDK’s
+ethereum
+address</td>
+<td><em>0x62730609
+0abaB3A6e14
+00e9345bC60
+c78a8BEf57</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="header-n9360">
+<span id="id7"></span><h3>Response<a class="headerlink" href="#header-n9360" title="Permalink to this headline">¶</a></h3>
+<p>Array</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Required</th>
+<th class="head">Description</th>
+<th class="head">Default
+Value</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">recipient</span></code></td>
+<td>required</td>
+<td>Ethereum
+address to
+sent the
+transaction
+to</td>
+<td>&#160;</td>
+<td><em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">sender</span></code></td>
+<td>required</td>
+<td>Ethereum
+address
+used to
+perform the
+transaction</td>
+<td>SDK’s
+ethereum
+address</td>
+<td><em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">amount</span></code></td>
+<td>required</td>
+<td>Amount
+transfered
+in <em>wei</em></td>
+<td>&#160;</td>
+<td><em>1000000000000000000</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">transactionId</span></code></td>
+<td>required</td>
+<td>Unique
+identifier
+of the
+transaction</td>
+<td>&#160;</td>
+<td><em>1</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">status</span></code></td>
+<td>required</td>
+<td>Status of
+the
+transaction</td>
+<td>&#160;</td>
+<td><em>confirmed,
+pending</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">nonce</span></code></td>
+<td>required</td>
+<td>Identifier
+generated
+from
+transaction</td>
+<td>&#160;</td>
+<td><em>1270040570</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">round</span></code></td>
+<td>required</td>
+<td>Round the
+transaction
+was
+performed</td>
+<td>&#160;</td>
+<td><em>4</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="header-n9411">
+<span id="id8"></span><h3>Example<a class="headerlink" href="#header-n9411" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/hub/audit/0x627306090abaB3A6e1400e9345bC60c78a8BEf57/transfers</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+</div>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">[</span>
+   <span class="p">{</span>
+       <span class="nt">&quot;transactionId&quot;</span><span class="p">:</span> <span class="s2">&quot;38&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;round&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+       <span class="nt">&quot;recipient&quot;</span><span class="p">:</span> <span class="s2">&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;sender&quot;</span><span class="p">:</span> <span class="s2">&quot;0xd977dA63d086d222EDE0aa68ee84328310485FFE&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;50000&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;nonce&quot;</span><span class="p">:</span> <span class="s2">&quot;1270040570&quot;</span>
+   <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="audit-deposits">
+<span id="header-n9415"></span><h2>Audit Deposits<a class="headerlink" href="#audit-deposits" title="Permalink to this headline">¶</a></h2>
+<p>For a specific <code class="docutils literal notranslate"><span class="pre">:address</span></code>, get information about its deposits.</p>
+<div class="section" id="header-n9417">
+<span id="id9"></span><h3>Endpoint<a class="headerlink" href="#header-n9417" title="Permalink to this headline">¶</a></h3>
+<dl class="get">
+<dt id="get--hub-audit--address-deposits">
+<code class="descname">GET </code><code class="descname">/hub/audit/:address/deposits</code><a class="headerlink" href="#get--hub-audit--address-deposits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="header-n9419">
+<span id="id10"></span><h3>Request<a class="headerlink" href="#header-n9419" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Required</th>
+<th class="head">Description</th>
+<th class="head">Default
+Value</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">address</span></code></td>
+<td>required</td>
+<td>Liquidity
+registered
+ethereum
+address</td>
+<td>SDK’s
+ethereum
+address</td>
+<td><em>0x627306090abaB3A6e1400e9345bC60c78a8BEf57</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="header-n9433">
+<span id="id11"></span><h3>Response<a class="headerlink" href="#header-n9433" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Required</th>
+<th class="head">Description</th>
+<th class="head">Default
+Value</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">transactionId</span></code></td>
+<td>required</td>
+<td>Transaction
+id of the
+deposit on
+Ethereum</td>
+<td>&#160;</td>
+<td><em>ee456c4f5f31e9b44c94df251690469fef4cf1c2b8f603edc62d7703acda098c</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">block</span></code></td>
+<td>required</td>
+<td>Block the
+transaction
+has been
+included
+into on
+Ethereum</td>
+<td>&#160;</td>
+<td><em>5898261</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">round</span></code></td>
+<td>required</td>
+<td>Round the
+wallet was
+registered</td>
+<td>&#160;</td>
+<td><em>4</em></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">amount</span></code></td>
+<td>required</td>
+<td>Amount
+deposited
+in <em>wei</em></td>
+<td>&#160;</td>
+<td><em>1000000000000000000</em></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">created_on</span></code></td>
+<td>required</td>
+<td>Date the
+transaction
+has been
+performed
+(ISO
+format)</td>
+<td>&#160;</td>
+<td><em>1970-01-01T00:00:00.000Z</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="header-n9471">
+<span id="id12"></span><h3>Example<a class="headerlink" href="#header-n9471" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/hub/audit/0x627306090abaB3A6e1400e9345bC60c78a8BEf57/deposits</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+</div>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">[</span>
+   <span class="p">{</span>
+       <span class="nt">&quot;transactionId&quot;</span><span class="p">:</span> <span class="s2">&quot;ee456c4f5f31e9b44c94df251690469fef4cf1c2b8f603edc62d7703acda098c&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;block&quot;</span><span class="p">:</span> <span class="mi">5898261</span><span class="p">,</span>
+       <span class="nt">&quot;round&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+       <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;50000&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-07-03T12:33:27.409540Z&quot;</span>
+   <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="wallet.html" class="btn btn-neutral" title="Wallet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
