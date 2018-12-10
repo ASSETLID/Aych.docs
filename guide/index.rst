@@ -81,7 +81,8 @@ Mainnet
      "ETHEREUM_NODE_URL": "https://mainnet.infura.io",
      "ETHEREUM_NETWORK_ID": "1",
      "HUB_CONTRACT_ADDRESS": "0x46a1657f132030476496112126Be35384bdDDDAD",
-     "HUB_PROVIDER_URL": "https://public.liquidity.network"
+     "HUB_PROVIDER_URL": "https://public.liquidity.network",
+     "TOKEN_CONTRACT_ADDRESS": "0x46a1657f132030476496112126Be35384bdDDDAD"
    }
 .. highlight:: none
 
@@ -95,7 +96,8 @@ Rinkeby Testnet
      "ETHEREUM_NODE_URL": "https://rinkeby.infura.io",
      "ETHEREUM_NETWORK_ID": "4",
      "HUB_CONTRACT_ADDRESS": "0x140D29486BABCbD57C63edCCCbf2EC92ffBfEc7c",
-     "HUB_PROVIDER_URL": "https://rinkeby.liquidity.network"
+     "HUB_PROVIDER_URL": "https://rinkeby.liquidity.network",
+     "TOKEN_CONTRACT_ADDRESS": "0x140D29486BABCbD57C63edCCCbf2EC92ffBfEc7c"
    }
 .. highlight:: none
 
