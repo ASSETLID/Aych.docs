@@ -15,7 +15,7 @@ source_suffix = ['.rst']
 source_parsers = {
             '.md': CommonMarkParser,
         }
-master_doc = 'index'
+master_doc = 'back_index'
 project = u'Liquidity SDK'
 copyright = str(datetime.now().year)
 version = 'latest'
