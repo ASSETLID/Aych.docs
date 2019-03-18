@@ -25,7 +25,7 @@ pygments_style = 'sphinx'
 htmlhelp_basename = 'liquidity-sdk'
 html_theme = 'sphinx_rtd_theme'
 file_insertion_enabled = False
-latex_documents = [
-  ('index', 'liquidity-sdk.tex', u'Liquidity SDK Documentation',
-   u'', 'manual'),
-]
+# latex_documents = [
+#   ('index', 'liquidity-sdk.tex', u'Liquidity SDK Documentation',
+#    u'', 'manual'),
+# ]
